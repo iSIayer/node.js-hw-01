@@ -1,8 +1,8 @@
+// const { nanoid } = require("nanoid");
 const path = require("path");
 const fs = require("fs").promises;
-
-const contactsPath = path.join(__dirname, "db/contacts.json");
 const { nanoid } = require("nanoid");
+const contactsPath = path.join(__dirname, "db/contacts.json");
 
 //  функции для работы с коллекцией контактов:
 
@@ -40,6 +40,7 @@ async function addContact(name, email, phone) {
   contactsList.push(newContact);
   fs.writeFile(contactsPath, JSON.stringify(contactsList));
   console.log(`Додали новий контакт ${name}`);
+  return newContact;
 }
 
 module.exports = {

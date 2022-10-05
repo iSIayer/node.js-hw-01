@@ -1,3 +1,6 @@
+const path = require("path");
+const joinPath = path.join(__dirname, "contacts.js");
+const contactsOperations = require(joinPath);
 const { Command } = require("commander");
 
 const program = new Command();
@@ -12,23 +15,36 @@ program.parse(process.argv);
 
 const argv = program.opts();
 
-// TODO: рефакторить
-function invokeAction({ action, id, name, email, phone }) {
+async function invokeAction({ action, id, name, email, phone }) {
   switch (action) {
     case "list":
-      // ...
+      const list = await contactsOperations.listContacts();
+      console.table(list);
       break;
 
     case "get":
-      // ... id
+      const contact = await contactsOperations.getContactById(id);
+      if (!contact) {
+        console.log(`Контакт ${id} не знайдено!`);
+        return;
+      }
+      console.log(contact);
       break;
 
     case "add":
-      // ... name email phone
+      const addElem = await contactsOperations.addContact(name, email, phone);
+      console.log(`Контакт ${addElem} був додний до листу`);
       break;
 
     case "remove":
-      // ... id
+      const removeItem = await contactsOperations.removeContact(id);
+      if (!removeItem) {
+        console.log(`Такого id = ${id} немае в листу контактiв`);
+        return;
+      }
+      console.log(
+        `Контакт ${removeItem.name} з id = ${id} був видалений з листу!`
+      );
       break;
 
     default:
