@@ -20,5 +20,8 @@
   "homepage": "https://github.com/iSIayer/node.js-hw-01#readme",
   "devDependencies": {
     "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "commander": "^9.4.1"
   }
 }

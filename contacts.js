@@ -1,7 +1,12 @@
 /*
  * Раскомментируй и запиши значение
- * const contactsPath = ;
+ *
  */
+
+const path = require("path");
+const fs = require("fs");
+
+const contactsPath = path.join(__dirname, "db/contacts.json");
 
 // TODO: задокументировать каждую функцию
 function listContacts() {
